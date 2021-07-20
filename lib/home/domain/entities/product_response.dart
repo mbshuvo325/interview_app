@@ -2,69 +2,71 @@
 //
 //     final productResponse = productResponseFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-ProductResponse productResponseFromJson(String str) =>
-    ProductResponse.fromJson(json.decode(str));
-ProductResponse productResponseFromRawJson(dynamic json) =>
-    ProductResponse.fromJson(json);
+List<List<ProductResponse>> productResponseFromJson(String str) =>
+    List<List<ProductResponse>>.from(json.decode(str).map((x) =>
+        List<ProductResponse>.from(x.map((x) => ProductResponse.fromJson(x)))));
+List<List<ProductResponse>> productResponseFromRawJson(dynamic json) =>
+    List<List<ProductResponse>>.from((json as List<dynamic>).map((x) =>
+        List<ProductResponse>.from(x.map((x) => ProductResponse.fromJson(x)))));
 
-String productResponseToJson(ProductResponse data) =>
-    json.encode(data.toJson());
+String productResponseToJson(List<List<ProductResponse>> data) =>
+    json.encode(List<dynamic>.from(
+        data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
 
 class ProductResponse {
   ProductResponse({
-    required this.storyTime,
-    required this.story,
-    required this.storyType,
-    required this.storyImage,
-    required this.storyAdditionalImages,
-    required this.promoImage,
-    required this.orderQty,
-    required this.lastAddToCart,
-    required this.availableStock,
-    required this.myId,
-    required this.ezShopName,
-    required this.companyName,
-    required this.companyLogo,
-    required this.companyEmail,
-    required this.currencyCode,
-    required this.unitPrice,
-    required this.discountAmount,
-    required this.discountPercent,
-    required this.iMyId,
-    required this.shopName,
-    required this.shopLogo,
-    required this.shopLink,
-    required this.friendlyTimeDiff,
-    required this.slNo,
+    this.storyTime,
+    this.story,
+    this.storyType,
+    this.storyImage,
+    this.storyAdditionalImages,
+    this.promoImage,
+    this.orderQty,
+    this.lastAddToCart,
+    this.availableStock,
+    this.myId,
+    this.ezShopName,
+    this.companyName,
+    this.companyLogo,
+    this.companyEmail,
+    this.currencyCode,
+    this.unitPrice,
+    this.discountAmount,
+    this.discountPercent,
+    this.iMyId,
+    this.shopName,
+    this.shopLogo,
+    this.shopLink,
+    this.friendlyTimeDiff,
+    this.slNo,
   });
 
-  final DateTime storyTime;
-  final String story;
-  final String storyType;
-  final String storyImage;
-  final String storyAdditionalImages;
-  final String promoImage;
-  final int orderQty;
-  final DateTime lastAddToCart;
-  final int availableStock;
-  final String myId;
-  final String ezShopName;
-  final String companyName;
-  final String companyLogo;
-  final String companyEmail;
-  final String currencyCode;
-  final int unitPrice;
-  final int discountAmount;
-  final int discountPercent;
-  final String iMyId;
-  final String shopName;
-  final String shopLogo;
-  final String shopLink;
-  final String friendlyTimeDiff;
-  final String slNo;
+  DateTime? storyTime;
+  String? story;
+  String? storyType;
+  String? storyImage;
+  String? storyAdditionalImages;
+  String? promoImage;
+  int? orderQty;
+  DateTime? lastAddToCart;
+  int? availableStock;
+  String? myId;
+  String? ezShopName;
+  String? companyName;
+  String? companyLogo;
+  String? companyEmail;
+  String? currencyCode;
+  int? unitPrice;
+  int? discountAmount;
+  int? discountPercent;
+  String? iMyId;
+  String? shopName;
+  String? shopLogo;
+  String? shopLink;
+  String? friendlyTimeDiff;
+  String? slNo;
 
   ProductResponse copyWith({
     DateTime? storyTime,
@@ -122,7 +124,9 @@ class ProductResponse {
 
   factory ProductResponse.fromJson(Map<String, dynamic> json) =>
       ProductResponse(
-        storyTime: json["storyTime"] == null ? null : json["storyTime"],
+        storyTime: json["storyTime"] == null
+            ? null
+            : DateTime.parse(json["storyTime"]),
         story: json["story"] == null ? null : json["story"],
         storyType: json["storyType"] == null ? null : json["storyType"],
         storyImage: json["storyImage"] == null ? null : json["storyImage"],
@@ -131,8 +135,9 @@ class ProductResponse {
             : json["storyAdditionalImages"],
         promoImage: json["promoImage"] == null ? null : json["promoImage"],
         orderQty: json["orderQty"] == null ? null : json["orderQty"],
-        lastAddToCart:
-            json["lastAddToCart"] == null ? null : json["lastAddToCart"],
+        lastAddToCart: json["lastAddToCart"] == null
+            ? null
+            : DateTime.parse(json["lastAddToCart"]),
         availableStock:
             json["availableStock"] == null ? null : json["availableStock"],
         myId: json["myId"] == null ? null : json["myId"],
@@ -158,7 +163,7 @@ class ProductResponse {
       );
 
   Map<String, dynamic> toJson() => {
-        "storyTime": storyTime == null ? null : storyTime.toIso8601String(),
+        "storyTime": storyTime == null ? null : storyTime!.toIso8601String(),
         "story": story == null ? null : story,
         "storyType": storyType == null ? null : storyType,
         "storyImage": storyImage == null ? null : storyImage,
@@ -167,7 +172,7 @@ class ProductResponse {
         "promoImage": promoImage == null ? null : promoImage,
         "orderQty": orderQty == null ? null : orderQty,
         "lastAddToCart":
-            lastAddToCart == null ? null : lastAddToCart.toIso8601String(),
+            lastAddToCart == null ? null : lastAddToCart!.toIso8601String(),
         "availableStock": availableStock == null ? null : availableStock,
         "myId": myId == null ? null : myId,
         "ezShopName": ezShopName == null ? null : ezShopName,

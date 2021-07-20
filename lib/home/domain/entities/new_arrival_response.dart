@@ -2,59 +2,64 @@
 //
 //     final newArrivalResponse = newArrivalResponseFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-NewArrivalResponse newArrivalResponseFromJson(String str) =>
-    NewArrivalResponse.fromJson(json.decode(str));
-NewArrivalResponse newArrivalResponseFromRawJson(dynamic json) =>
-    NewArrivalResponse.fromJson(json);
+List<List<NewArrivalResponse>> newArrivalResponseFromJson(String str) =>
+    List<List<NewArrivalResponse>>.from(json.decode(str).map((x) =>
+        List<NewArrivalResponse>.from(
+            x.map((x) => NewArrivalResponse.fromJson(x)))));
 
-String newArrivalResponseToJson(NewArrivalResponse data) =>
-    json.encode(data.toJson());
+List<List<NewArrivalResponse>> newArrivalResponseFromRawJson(dynamic json) =>
+    List<List<NewArrivalResponse>>.from((json as List<dynamic>).map((x) =>
+        List<NewArrivalResponse>.from(
+            x.map((x) => NewArrivalResponse.fromJson(x)))));
+
+String newArrivalResponseToJson(List<List<NewArrivalResponse>> data) =>
+    json.encode(List<dynamic>.from(
+        data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
 
 class NewArrivalResponse {
   NewArrivalResponse({
-    required this.slNo,
-    required this.productName,
-    required this.shortDetails,
-    required this.productDescription,
-    required this.availableStock,
-    required this.orderQty,
-    required this.salesQty,
-    required this.orderAmount,
-    required this.salesAmount,
-    required this.discountPercent,
-    required this.discountAmount,
-    required this.unitPrice,
-    required this.productImage,
-    required this.sellerName,
-    required this.sellerProfilePhoto,
-    required this.sellerCoverPhoto,
-    required this.ezShopName,
-    required this.defaultPushScore,
-    required this.myProductVarId,
+    this.slNo,
+    this.productName,
+    this.shortDetails,
+    this.productDescription,
+    this.availableStock,
+    this.orderQty,
+    this.salesQty,
+    this.orderAmount,
+    this.salesAmount,
+    this.discountPercent,
+    this.discountAmount,
+    this.unitPrice,
+    this.productImage,
+    this.sellerName,
+    this.sellerProfilePhoto,
+    this.sellerCoverPhoto,
+    this.ezShopName,
+    this.defaultPushScore,
+    this.myProductVarId,
   });
 
-  final String slNo;
-  final String productName;
-  final String shortDetails;
-  final String productDescription;
-  final int availableStock;
-  final int orderQty;
-  final int salesQty;
-  final int orderAmount;
-  final int salesAmount;
-  final int discountPercent;
-  final int discountAmount;
-  final int unitPrice;
-  final String productImage;
-  final String sellerName;
-  final String sellerProfilePhoto;
-  final String sellerCoverPhoto;
-  final String ezShopName;
-  final int defaultPushScore;
-  final String myProductVarId;
+  String? slNo;
+  String? productName;
+  String? shortDetails;
+  String? productDescription;
+  int? availableStock;
+  int? orderQty;
+  int? salesQty;
+  int? orderAmount;
+  int? salesAmount;
+  int? discountPercent;
+  int? discountAmount;
+  int? unitPrice;
+  String? productImage;
+  String? sellerName;
+  String? sellerProfilePhoto;
+  String? sellerCoverPhoto;
+  String? ezShopName;
+  double? defaultPushScore;
+  String? myProductVarId;
 
   NewArrivalResponse copyWith({
     String? slNo,
@@ -74,7 +79,7 @@ class NewArrivalResponse {
     String? sellerProfilePhoto,
     String? sellerCoverPhoto,
     String? ezShopName,
-    int? defaultPushScore,
+    double? defaultPushScore,
     String? myProductVarId,
   }) =>
       NewArrivalResponse(
@@ -128,8 +133,9 @@ class NewArrivalResponse {
         sellerCoverPhoto:
             json["sellerCoverPhoto"] == null ? null : json["sellerCoverPhoto"],
         ezShopName: json["ezShopName"] == null ? null : json["ezShopName"],
-        defaultPushScore:
-            json["defaultPushScore"] == null ? null : json["defaultPushScore"],
+        defaultPushScore: json["defaultPushScore"] == null
+            ? null
+            : json["defaultPushScore"].toDouble(),
         myProductVarId:
             json["myProductVarId"] == null ? null : json["myProductVarId"],
       );

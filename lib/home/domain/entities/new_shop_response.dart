@@ -1,76 +1,78 @@
 // To parse this JSON data, do
 //
-//     final trendingSellerResponse = trendingSellerResponseFromJson(jsonString);
+//     final newShopResponse = newShopResponseFromJson(jsonString);
+
 import 'dart:convert';
 
-TrendingSellerResponse trendingSellerResponseFromJson(String str) =>
-    TrendingSellerResponse.fromJson(json.decode(str));
+List<List<NewShopResponse>> newShopResponseFromJson(String str) =>
+    List<List<NewShopResponse>>.from(json.decode(str).map((x) =>
+        List<NewShopResponse>.from(x.map((x) => NewShopResponse.fromJson(x)))));
 
-TrendingSellerResponse trendingSellerResponseFromRawJson(dynamic json) {
-  print("JSON : $json");
-  return TrendingSellerResponse.fromJson(json);
-}
+List<List<NewShopResponse>> newShopResponseFromRawJson(dynamic json) =>
+    List<List<NewShopResponse>>.from((json as List<dynamic>).map((x) =>
+        List<NewShopResponse>.from(x.map((x) => NewShopResponse.fromJson(x)))));
 
-String trendingSellerResponseToJson(TrendingSellerResponse data) =>
-    json.encode(data.toJson());
+String newShopResponseToJson(List<List<NewShopResponse>> data) =>
+    json.encode(List<dynamic>.from(
+        data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
 
-class TrendingSellerResponse {
-  TrendingSellerResponse({
-    required this.slNo,
-    required this.sellerName,
-    required this.sellerProfilePhoto,
-    required this.sellerItemPhoto,
-    required this.ezShopName,
-    required this.defaultPushScore,
-    required this.aboutCompany,
-    required this.allowCod,
-    required this.division,
-    required this.subDivision,
-    required this.city,
-    required this.state,
-    required this.zipcode,
-    required this.country,
-    required this.currencyCode,
-    required this.orderQty,
-    required this.orderAmount,
-    required this.salesQty,
-    required this.salesAmount,
-    required this.highestDiscountPercent,
-    required this.lastAddToCart,
-    required this.lastAddToCartThatSold,
+class NewShopResponse {
+  NewShopResponse({
+    this.slNo,
+    this.sellerName,
+    this.sellerProfilePhoto,
+    this.sellerItemPhoto,
+    this.ezShopName,
+    this.defaultPushScore,
+    this.aboutCompany,
+    this.allowCod,
+    this.division,
+    this.subDivision,
+    this.city,
+    this.state,
+    this.zipcode,
+    this.country,
+    this.currencyCode,
+    this.orderQty,
+    this.orderAmount,
+    this.salesQty,
+    this.salesAmount,
+    this.highestDiscountPercent,
+    this.lastAddToCart,
+    this.lastAddToCartThatSold,
   });
 
-  final String slNo;
-  final String sellerName;
-  final String sellerProfilePhoto;
-  final String sellerItemPhoto;
-  final String ezShopName;
-  final double defaultPushScore;
-  final dynamic aboutCompany;
-  final int allowCod;
-  final dynamic division;
-  final dynamic subDivision;
-  final String city;
-  final String state;
-  final String zipcode;
-  final String country;
-  final String currencyCode;
-  final int orderQty;
-  final int orderAmount;
-  final int salesQty;
-  final int salesAmount;
-  final int highestDiscountPercent;
-  final DateTime lastAddToCart;
-  final DateTime lastAddToCartThatSold;
+  String? slNo;
+  String? sellerName;
+  String? sellerProfilePhoto;
+  String? sellerItemPhoto;
+  String? ezShopName;
+  double? defaultPushScore;
+  String? aboutCompany;
+  int? allowCod;
+  dynamic division;
+  dynamic subDivision;
+  String? city;
+  String? state;
+  String? zipcode;
+  String? country;
+  String? currencyCode;
+  int? orderQty;
+  int? orderAmount;
+  int? salesQty;
+  int? salesAmount;
+  int? highestDiscountPercent;
+  DateTime? lastAddToCart;
+  DateTime? lastAddToCartThatSold;
 
-  TrendingSellerResponse copyWith({
+  NewShopResponse copyWith({
     String? slNo,
     String? sellerName,
     String? sellerProfilePhoto,
     String? sellerItemPhoto,
     String? ezShopName,
     double? defaultPushScore,
-    dynamic aboutCompany,
+    String? aboutCompany,
     int? allowCod,
     dynamic division,
     dynamic subDivision,
@@ -87,7 +89,7 @@ class TrendingSellerResponse {
     DateTime? lastAddToCart,
     DateTime? lastAddToCartThatSold,
   }) =>
-      TrendingSellerResponse(
+      NewShopResponse(
         slNo: slNo ?? this.slNo,
         sellerName: sellerName ?? this.sellerName,
         sellerProfilePhoto: sellerProfilePhoto ?? this.sellerProfilePhoto,
@@ -114,8 +116,8 @@ class TrendingSellerResponse {
             lastAddToCartThatSold ?? this.lastAddToCartThatSold,
       );
 
-  factory TrendingSellerResponse.fromJson(Map<String, dynamic> json) =>
-      TrendingSellerResponse(
+  factory NewShopResponse.fromJson(Map<String, dynamic> json) =>
+      NewShopResponse(
         slNo: json["slNo"] == null ? null : json["slNo"],
         sellerName: json["sellerName"] == null ? null : json["sellerName"],
         sellerProfilePhoto: json["sellerProfilePhoto"] == null
@@ -127,7 +129,8 @@ class TrendingSellerResponse {
         defaultPushScore: json["defaultPushScore"] == null
             ? null
             : json["defaultPushScore"].toDouble(),
-        aboutCompany: json["aboutCompany"],
+        aboutCompany:
+            json["aboutCompany"] == null ? null : json["aboutCompany"],
         allowCod: json["allowCOD"] == null ? null : json["allowCOD"],
         division: json["division"],
         subDivision: json["subDivision"],
@@ -159,7 +162,7 @@ class TrendingSellerResponse {
         "sellerItemPhoto": sellerItemPhoto == null ? null : sellerItemPhoto,
         "ezShopName": ezShopName == null ? null : ezShopName,
         "defaultPushScore": defaultPushScore == null ? null : defaultPushScore,
-        "aboutCompany": aboutCompany,
+        "aboutCompany": aboutCompany == null ? null : aboutCompany,
         "allowCOD": allowCod == null ? null : allowCod,
         "division": division,
         "subDivision": subDivision,
@@ -175,9 +178,9 @@ class TrendingSellerResponse {
         "highestDiscountPercent":
             highestDiscountPercent == null ? null : highestDiscountPercent,
         "lastAddToCart":
-            lastAddToCart == null ? null : lastAddToCart.toIso8601String(),
+            lastAddToCart == null ? null : lastAddToCart!.toIso8601String(),
         "lastAddToCartThatSold": lastAddToCartThatSold == null
             ? null
-            : lastAddToCartThatSold.toIso8601String(),
+            : lastAddToCartThatSold!.toIso8601String(),
       };
 }

@@ -4,56 +4,65 @@
 
 import 'dart:convert';
 
-TrendingProductResponse trendingProductResponseFromJson(String str) =>
-    TrendingProductResponse.fromJson(json.decode(str));
-TrendingProductResponse trendingProductResponseFromRawJson(dynamic json) =>
-    TrendingProductResponse.fromJson(json);
+List<List<TrendingProductResponse>> trendingProductResponseFromJson(
+        String str) =>
+    List<List<TrendingProductResponse>>.from(json.decode(str).map((x) =>
+        List<TrendingProductResponse>.from(
+            x.map((x) => TrendingProductResponse.fromJson(x)))));
 
-String trendingProductResponseToJson(TrendingProductResponse data) =>
-    json.encode(data.toJson());
+List<List<TrendingProductResponse>> trendingProductResponseFromRawJson(
+        dynamic json) =>
+    List<List<TrendingProductResponse>>.from((json as List<dynamic>).map((x) =>
+        List<TrendingProductResponse>.from(
+            x.map((x) => TrendingProductResponse.fromJson(x)))));
+
+String trendingProductResponseToJson(
+        List<List<TrendingProductResponse>> data) =>
+    json.encode(List<dynamic>.from(
+        data.map((x) => List<dynamic>.from(x.map((x) => x.toJson())))));
 
 class TrendingProductResponse {
   TrendingProductResponse({
-    required this.slNo,
-    required this.productName,
-    required this.shortDetails,
-    required this.productDescription,
-    required this.availableStock,
-    required this.orderQty,
-    required this.salesQty,
-    required this.orderAmount,
-    required this.salesAmount,
-    required this.discountPercent,
-    required this.discountAmount,
-    required this.unitPrice,
-    required this.productImage,
-    required this.sellerName,
-    required this.sellerProfilePhoto,
-    required this.sellerCoverPhoto,
-    required this.ezShopName,
-    required this.defaultPushScore,
-    required this.myProductVarId,
+    this.slNo,
+    this.productName,
+    this.shortDetails,
+    this.productDescription,
+    this.availableStock,
+    this.orderQty,
+    this.salesQty,
+    this.orderAmount,
+    this.salesAmount,
+    this.discountPercent,
+    this.discountAmount,
+    this.unitPrice,
+    this.productImage,
+    this.sellerName,
+    this.sellerProfilePhoto,
+    this.sellerCoverPhoto,
+    this.ezShopName,
+    this.defaultPushScore,
+    this.myProductVarId,
   });
 
-  final String slNo;
-  final String productName;
-  final String shortDetails;
-  final String productDescription;
-  final int availableStock;
-  final int orderQty;
-  final int salesQty;
-  final int orderAmount;
-  final int salesAmount;
-  final int discountPercent;
-  final int discountAmount;
-  final int unitPrice;
-  final String productImage;
-  final String sellerName;
-  final String sellerProfilePhoto;
-  final String sellerCoverPhoto;
-  final String ezShopName;
-  final int defaultPushScore;
-  final String myProductVarId;
+  String? slNo;
+  String? productName;
+  String? shortDetails;
+  String? productDescription;
+  int? availableStock;
+  int? orderQty;
+  int? salesQty;
+  int? orderAmount;
+  int? salesAmount;
+  int? discountPercent;
+  int? discountAmount;
+  int? unitPrice;
+  String? productImage;
+  String? sellerName;
+  String? sellerProfilePhoto;
+  String? sellerCoverPhoto;
+  String? ezShopName;
+  int? defaultPushScore;
+  String? myProductVarId;
 
   TrendingProductResponse copyWith({
     String? slNo,
