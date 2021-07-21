@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:hive/hive.dart';
 import 'package:interview_app/home/domain/entities/new_arrival_response.dart';
 
