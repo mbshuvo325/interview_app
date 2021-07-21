@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:interview_app/_helper/new_Shop_item.dart';
 import 'package:interview_app/_helper/seller_item.dart';
 import 'package:interview_app/home/presentation/manager/home_page_controller.dart';
 
-class TrendingSeller extends StatelessWidget {
-  const TrendingSeller({
+class NewShop extends StatelessWidget {
+  const NewShop({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -15,11 +16,11 @@ class TrendingSeller extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      child: Obx(() => controller.trendingSeller.value != null
+      child: Obx(() => controller.newShop.value != null
           ? ListView.builder(
               physics: ClampingScrollPhysics(),
               shrinkWrap: true,
-              itemCount: controller.trendingSeller.value!.length,
+              itemCount: controller.newShop.value!.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   height: size.height * 0.3,
@@ -38,18 +39,15 @@ class TrendingSeller extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       physics: ClampingScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: controller.trendingSeller.value![index].length,
+                      itemCount: controller.newShop.value![index].length,
                       itemBuilder: (BuildContext cxt, int i) {
-                        var item = controller.trendingSeller.value![index][i];
-                        return sellerItem(size, item);
+                        var item = controller.newShop.value![index][i];
+                        return newShopItem(size, item);
                       }),
                 );
               },
             )
-          : Center(
-              child: Container(
-              child: CircularProgressIndicator(),
-            ))),
+          : Center()),
     );
   }
 }

@@ -1,9 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:interview_app/home/domain/entities/new_shop_response.dart';
-import 'package:interview_app/home/domain/entities/product_response.dart';
-import 'package:interview_app/home/domain/entities/tranding_product_response.dart';
-import 'package:interview_app/home/domain/entities/tranding_seller_response.dart';
 
 abstract class INewShopLocalProvider {
   Future<List<List<NewShopResponse>>?> getAllShop();

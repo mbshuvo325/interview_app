@@ -62,8 +62,8 @@ class NewShopResponse {
   int? salesQty;
   int? salesAmount;
   int? highestDiscountPercent;
-  DateTime? lastAddToCart;
-  DateTime? lastAddToCartThatSold;
+  String? lastAddToCart;
+  String? lastAddToCartThatSold;
 
   NewShopResponse copyWith({
     String? slNo,
@@ -86,8 +86,8 @@ class NewShopResponse {
     int? salesQty,
     int? salesAmount,
     int? highestDiscountPercent,
-    DateTime? lastAddToCart,
-    DateTime? lastAddToCartThatSold,
+    String? lastAddToCart,
+    String? lastAddToCartThatSold,
   }) =>
       NewShopResponse(
         slNo: slNo ?? this.slNo,
@@ -177,10 +177,8 @@ class NewShopResponse {
         "salesAmount": salesAmount == null ? null : salesAmount,
         "highestDiscountPercent":
             highestDiscountPercent == null ? null : highestDiscountPercent,
-        "lastAddToCart":
-            lastAddToCart == null ? null : lastAddToCart!.toIso8601String(),
-        "lastAddToCartThatSold": lastAddToCartThatSold == null
-            ? null
-            : lastAddToCartThatSold!.toIso8601String(),
+        "lastAddToCart": lastAddToCart == null ? null : lastAddToCart!,
+        "lastAddToCartThatSold":
+            lastAddToCartThatSold == null ? null : lastAddToCartThatSold!,
       };
 }

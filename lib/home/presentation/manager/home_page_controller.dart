@@ -25,6 +25,10 @@ class HomePageController extends GetxController {
   final trendingProduct = Rxn<List<List<TrendingProductResponse>>>();
   final newProduct = Rxn<List<List<ProductResponse>>>();
   final newShop = Rxn<List<List<NewShopResponse>>>();
+  var productList = <ProductResponse>[].obs;
+  var firstThreeProduct = <ProductResponse>[].obs;
+  var secondThreeProduct = <ProductResponse>[].obs;
+  var restOfProduct = <ProductResponse>[].obs;
 
   @override
   void onInit() async {
@@ -32,6 +36,7 @@ class HomePageController extends GetxController {
     await getAllTrendingProduct();
     await getAllNewArrival();
     await getAllProduct();
+    await getAllShop();
     super.onInit();
   }
 
@@ -53,5 +58,18 @@ class HomePageController extends GetxController {
   getAllProduct() async {
     final response = await getProducts.call(NoParams());
     newProduct.value = response;
+    newProduct.value!.forEach((element) {
+      element.forEach((e) {
+        productList.add(e);
+      });
+    });
+    firstThreeProduct.assignAll(productList.getRange(0, 3));
+    secondThreeProduct.assignAll(productList.getRange(3, 6));
+    restOfProduct.assignAll(productList.getRange(6, productList.length));
+  }
+
+  getAllShop() async {
+    final response = await getNewShop.call(NoParams());
+    newShop.value = response;
   }
 }

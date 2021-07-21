@@ -1,10 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:interview_app/_helper/seller_item.dart';
+import 'package:interview_app/_helper/trending_product_item.dart';
+import 'package:interview_app/home/domain/entities/tranding_product_response.dart';
 import 'package:interview_app/home/presentation/manager/home_page_controller.dart';
 
-class TrendingSeller extends StatelessWidget {
-  const TrendingSeller({
+class TrendingProduct extends StatelessWidget {
+  const TrendingProduct({
     Key? key,
     required this.controller,
   }) : super(key: key);
@@ -15,11 +18,11 @@ class TrendingSeller extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      child: Obx(() => controller.trendingSeller.value != null
+      child: Obx(() => controller.trendingProduct.value != null
           ? ListView.builder(
               physics: ClampingScrollPhysics(),
               shrinkWrap: true,
-              itemCount: controller.trendingSeller.value!.length,
+              itemCount: controller.trendingProduct.value!.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   height: size.height * 0.3,
@@ -38,18 +41,16 @@ class TrendingSeller extends StatelessWidget {
                       scrollDirection: Axis.horizontal,
                       physics: ClampingScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: controller.trendingSeller.value![index].length,
+                      itemCount:
+                          controller.trendingProduct.value![index].length,
                       itemBuilder: (BuildContext cxt, int i) {
-                        var item = controller.trendingSeller.value![index][i];
-                        return sellerItem(size, item);
+                        var item = controller.trendingProduct.value![index][i];
+                        return trendingProductItem(size, item);
                       }),
                 );
               },
             )
-          : Center(
-              child: Container(
-              child: CircularProgressIndicator(),
-            ))),
+          : Center()),
     );
   }
 }
