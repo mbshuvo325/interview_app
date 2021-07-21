@@ -1,37 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:interview_app/home/presentation/manager/home_page_controller.dart';
+import 'package:interview_app/home/presentation/widgets/trending_seller_widgets.dart';
 
 class HomePage extends GetResponsiveView<HomePageController> {
   @override
   Widget build(BuildContext context) {
-    controller.getAllTrendingSeller();
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Obx(() => controller.trendingSeller.value != null
-          ? ListView.builder(
-              itemCount: controller.trendingSeller.value!.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 500,
-                  width: 300,
-                  child: ListView.builder(
-                      itemCount: controller.trendingSeller.value![index].length,
-                      itemBuilder: (BuildContext cxt, int i) {
-                        var item = controller.trendingSeller.value![index][i];
-                        return Container(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text("${item.ezShopName}"),
-                          ),
-                        );
-                      }),
-                );
-              },
-            )
-          : Center(
-              child: Container(
-              child: CircularProgressIndicator(),
-            ))),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'Trending Seller',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+              ),
+              SizedBox(
+                height: size.height * 0.25,
+                child: TrendingSeller(
+                  controller: controller,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
